@@ -1,0 +1,32 @@
+{
+    "name": "lit-google-map",
+    "version": "0.1.0",
+    "description": "Google Maps web components based on LitElement",
+    "private": true,
+    "license": "MIT",
+    "author": {
+        "name": "Arkadiusz Wójcik",
+        "url": "http://github.com/arkadiuszwojcik"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/arkadiuszwojcik/lit-google-map.git"
+    },
+    "main": "dist/lit-google-map.bundle.min.js",
+    "module": "dist/lit-google-map.esm.min.js",
+    "typings": "*.d.ts",
+    "scripts": {
+        "build": "tsc",
+        "bundle": "npm run build && rollup -c"
+    },
+    "dependencies": {
+        "lit-element": "^2.2.1"
+    },
+    "devDependencies": {
+        "@types/googlemaps": "^3.39.2",
+        "typescript": "^3.7.5",
+        "rollup": "^1.30.0",
+        "@rollup/plugin-node-resolve": "^7.0.0",
+        "rollup-plugin-terser": "^5.2.0"
+    }
+}
