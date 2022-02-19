@@ -29,6 +29,7 @@ export default [
                 format: 'esm',
                 plugins: [terser()]
             }
-        ]
+        ],
+        external: ['tslib', 'lit-element']
     }
 ]

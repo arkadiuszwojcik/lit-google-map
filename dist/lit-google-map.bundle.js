@@ -1,6 +1,32 @@
 (function (exports) {
     'use strict';
 
+    /*! *****************************************************************************
+    Copyright (c) Microsoft Corporation.
+
+    Permission to use, copy, modify, and/or distribute this software for any
+    purpose with or without fee is hereby granted.
+
+    THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+    REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
+    AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
+    INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
+    LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
+    OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+    PERFORMANCE OF THIS SOFTWARE.
+    ***************************************************************************** */
+
+    function __decorate(decorators, target, key, desc) {
+        var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+        if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+        else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+        return c > 3 && r && Object.defineProperty(target, key, r), r;
+    }
+
+    function __metadata(metadataKey, metadataValue) {
+        if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(metadataKey, metadataValue);
+    }
+
     /**
      * @license
      * Copyright (c) 2017 The Polymer Project Authors. All rights reserved.
@@ -1072,7 +1098,7 @@
      *     container. Render options must *not* change between renders to the same
      *     container, as those changes will not effect previously rendered DOM.
      */
-    const render = (result, container, options) => {
+    const render$1 = (result, container, options) => {
         let part = parts.get(container);
         if (part === undefined) {
             removeNodes(container, container.firstChild);
@@ -1448,7 +1474,7 @@
      * non-shorthand names (for example `border` and `border-width`) is not
      * supported.
      */
-    const render$1 = (result, container, options) => {
+    const render = (result, container, options) => {
         if (!options || typeof options !== 'object' || !options.scopeName) {
             throw new Error('The `scopeName` option is required.');
         }
@@ -1462,7 +1488,7 @@
         // On first scope render, render into a fragment; this cannot be a single
         // fragment that is reused since nested renders can occur synchronously.
         const renderContainer = firstScopeRender ? document.createDocumentFragment() : container;
-        render(result, renderContainer, Object.assign({ templateFactory: shadyTemplateFactory(scopeName) }, options));
+        render$1(result, renderContainer, Object.assign({ templateFactory: shadyTemplateFactory(scopeName) }, options));
         // When performing first scope render,
         // (1) We've rendered into a fragment so that there's a chance to
         // `prepareTemplateStyles` before sub-elements hit the DOM
@@ -2481,7 +2507,7 @@
      * @param {String} Element name.
      * @nocollapse
      */
-    LitElement.render = render$1;
+    LitElement.render = render;
 
     class ScriptLoaderMap {
         constructor() {
@@ -2567,15 +2593,6 @@
         }
     }
 
-    var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
-        var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-        if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-        else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-        return c > 3 && r && Object.defineProperty(target, key, r), r;
-    };
-    var __metadata = (undefined && undefined.__metadata) || function (k, v) {
-        if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-    };
     class JsonpLibraryElement extends LitElement {
         constructor() {
             super(...arguments);
@@ -2673,15 +2690,6 @@
         customElement('lit-google-maps-api')
     ], exports.LitGoogleMapsApi);
 
-    var __decorate$1 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
-        var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-        if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-        else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-        return c > 3 && r && Object.defineProperty(target, key, r), r;
-    };
-    var __metadata$1 = (undefined && undefined.__metadata) || function (k, v) {
-        if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-    };
     exports.LitGoogleMapMarker = class LitGoogleMapMarker extends LitElement {
         constructor() {
             super(...arguments);
@@ -2790,39 +2798,30 @@
             }
         }
     };
-    __decorate$1([
+    __decorate([
         property({ type: Number, reflect: true }),
-        __metadata$1("design:type", Number)
+        __metadata("design:type", Number)
     ], exports.LitGoogleMapMarker.prototype, "latitude", void 0);
-    __decorate$1([
+    __decorate([
         property({ type: Number, reflect: true }),
-        __metadata$1("design:type", Number)
+        __metadata("design:type", Number)
     ], exports.LitGoogleMapMarker.prototype, "longitude", void 0);
-    __decorate$1([
+    __decorate([
         property({ type: String, reflect: true }),
-        __metadata$1("design:type", String)
+        __metadata("design:type", String)
     ], exports.LitGoogleMapMarker.prototype, "label", void 0);
-    __decorate$1([
+    __decorate([
         property({ type: Number, reflect: true, attribute: 'z-index' }),
-        __metadata$1("design:type", Number)
+        __metadata("design:type", Number)
     ], exports.LitGoogleMapMarker.prototype, "zIndex", void 0);
-    __decorate$1([
+    __decorate([
         property({ type: Boolean, reflect: true }),
-        __metadata$1("design:type", Boolean)
+        __metadata("design:type", Boolean)
     ], exports.LitGoogleMapMarker.prototype, "open", void 0);
-    exports.LitGoogleMapMarker = __decorate$1([
+    exports.LitGoogleMapMarker = __decorate([
         customElement('lit-google-map-marker')
     ], exports.LitGoogleMapMarker);
 
-    var __decorate$2 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
-        var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-        if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-        else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-        return c > 3 && r && Object.defineProperty(target, key, r), r;
-    };
-    var __metadata$2 = (undefined && undefined.__metadata) || function (k, v) {
-        if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-    };
     exports.LitGoogleMap = class LitGoogleMap extends LitElement {
         constructor() {
             super(...arguments);
@@ -2931,39 +2930,39 @@
         `;
         }
     };
-    __decorate$2([
+    __decorate([
         property({ type: String, attribute: 'api-key' }),
-        __metadata$2("design:type", String)
+        __metadata("design:type", String)
     ], exports.LitGoogleMap.prototype, "apiKey", void 0);
-    __decorate$2([
+    __decorate([
         property({ type: String }),
-        __metadata$2("design:type", String)
+        __metadata("design:type", String)
     ], exports.LitGoogleMap.prototype, "version", void 0);
-    __decorate$2([
+    __decorate([
         property({ type: Object }),
-        __metadata$2("design:type", Object)
+        __metadata("design:type", Object)
     ], exports.LitGoogleMap.prototype, "styles", void 0);
-    __decorate$2([
+    __decorate([
         property({ type: Number }),
-        __metadata$2("design:type", Number)
+        __metadata("design:type", Number)
     ], exports.LitGoogleMap.prototype, "zoom", void 0);
-    __decorate$2([
+    __decorate([
         property({ type: Boolean, attribute: 'fit-to-markers' }),
-        __metadata$2("design:type", Boolean)
+        __metadata("design:type", Boolean)
     ], exports.LitGoogleMap.prototype, "fitToMarkers", void 0);
-    __decorate$2([
+    __decorate([
         property({ type: String, attribute: 'map-type' }),
-        __metadata$2("design:type", String)
+        __metadata("design:type", String)
     ], exports.LitGoogleMap.prototype, "mapType", void 0);
-    __decorate$2([
+    __decorate([
         property({ type: Number, attribute: 'center-latitude' }),
-        __metadata$2("design:type", Number)
+        __metadata("design:type", Number)
     ], exports.LitGoogleMap.prototype, "centerLatitude", void 0);
-    __decorate$2([
+    __decorate([
         property({ type: Number, attribute: 'center-longitude' }),
-        __metadata$2("design:type", Number)
+        __metadata("design:type", Number)
     ], exports.LitGoogleMap.prototype, "centerLongitude", void 0);
-    exports.LitGoogleMap = __decorate$2([
+    exports.LitGoogleMap = __decorate([
         customElement('lit-google-map')
     ], exports.LitGoogleMap);
 
@@ -3015,15 +3014,6 @@
         }
     }
 
-    var __decorate$3 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
-        var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-        if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-        else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-        return c > 3 && r && Object.defineProperty(target, key, r), r;
-    };
-    var __metadata$3 = (undefined && undefined.__metadata) || function (k, v) {
-        if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-    };
     exports.LitSelector = class LitSelector extends LitElement {
         constructor() {
             super(...arguments);
@@ -3065,9 +3055,9 @@
             }
         }
         updateItems() {
-            var _a, _b;
+            var _a;
             var slotElement = this.querySelector("slot");
-            this._items = (_b = (_a = slotElement) === null || _a === void 0 ? void 0 : _a.assignedNodes(), (_b !== null && _b !== void 0 ? _b : []));
+            this._items = (_a = slotElement === null || slotElement === void 0 ? void 0 : slotElement.assignedNodes()) !== null && _a !== void 0 ? _a : [];
         }
         addListener(eventName) {
             this.addEventListener(eventName, (event) => this.activateHandler(event));
@@ -3122,22 +3112,24 @@
             return this._items ? this._items.indexOf(item) : -1;
         }
     };
-    __decorate$3([
+    __decorate([
         property({ type: String, attribute: 'activate-event' }),
-        __metadata$3("design:type", String)
+        __metadata("design:type", String)
     ], exports.LitSelector.prototype, "activateEvent", void 0);
-    __decorate$3([
+    __decorate([
         property({ type: String, attribute: 'selected-attribute' }),
-        __metadata$3("design:type", String)
+        __metadata("design:type", String)
     ], exports.LitSelector.prototype, "selectedAttribute", void 0);
-    __decorate$3([
+    __decorate([
         property({ type: Number, reflect: true }),
-        __metadata$3("design:type", Object)
+        __metadata("design:type", Object)
     ], exports.LitSelector.prototype, "selected", void 0);
-    exports.LitSelector = __decorate$3([
+    exports.LitSelector = __decorate([
         customElement('lit-selector')
     ], exports.LitSelector);
 
+    Object.defineProperty(exports, '__esModule', { value: true });
+
     return exports;
 
-}({}));
+})({});
