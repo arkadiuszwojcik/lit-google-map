@@ -30,6 +30,6 @@ export default [
                 plugins: [terser()]
             }
         ],
-        external: ['tslib', 'lit-element']
+        external: ['tslib', 'lit', 'lit/decorators.js']
     }
 ]

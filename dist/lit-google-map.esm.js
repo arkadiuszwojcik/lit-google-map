@@ -1,5 +1,6 @@
 import { __decorate, __metadata } from 'tslib';
-import { property, customElement, LitElement, css, html } from 'lit-element';
+import { LitElement, css, html } from 'lit';
+import { property, customElement } from 'lit/decorators.js';
 
 class ScriptLoaderMap {
     constructor() {
@@ -399,14 +400,6 @@ let LitGoogleMap = class LitGoogleMap extends LitElement {
     }
     deselectMarker(event) {
     }
-    static get styles() {
-        return css `
-            #map {
-                width: 100%;
-                height: 100%;
-            }
-        `;
-    }
     render() {
         return html `
             <lit-google-maps-api id="api" api-key="${this.apiKey}" version="${this.version}" @api-load=${() => this.mapApiLoaded()}></lit-google-maps-api>
@@ -422,6 +415,12 @@ let LitGoogleMap = class LitGoogleMap extends LitElement {
         `;
     }
 };
+LitGoogleMap.styles = css `
+        #map {
+            width: 100%;
+            height: 100%;
+        }
+    `;
 __decorate([
     property({ type: String, attribute: 'api-key' }),
     __metadata("design:type", String)

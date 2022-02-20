@@ -1,4 +1,5 @@
-import {LitElement, html, css, customElement, property} from 'lit-element';
+import {LitElement, html, css} from 'lit';
+import {customElement, property} from 'lit/decorators.js';
 import {LitGoogleMapsApi} from './lit-google-maps-api';
 import {LitGoogleMapMarker} from './lit-google-map-marker';
 import {LitSelector} from './lit-selector';
@@ -154,14 +155,12 @@ export class LitGoogleMap extends LitElement {
     deselectMarker(event : Event) {
     }
 
-    static get styles() {
-        return css`
-            #map {
-                width: 100%;
-                height: 100%;
-            }
-        `;
-    }
+    static styles = css`
+        #map {
+            width: 100%;
+            height: 100%;
+        }
+    `;
 
     render() {
         return html`

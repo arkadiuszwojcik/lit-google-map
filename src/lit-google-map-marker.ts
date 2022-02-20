@@ -1,4 +1,5 @@
-import {LitElement, customElement, property} from 'lit-element';
+import {LitElement} from 'lit';
+import {customElement, property} from 'lit/decorators.js'
 
 @customElement('lit-google-map-marker')
 export class LitGoogleMapMarker extends LitElement {

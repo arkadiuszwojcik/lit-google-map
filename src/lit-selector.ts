@@ -1,4 +1,5 @@
-import {LitElement, customElement, property} from 'lit-element';
+import {LitElement} from 'lit';
+import {customElement, property} from 'lit/decorators.js';
 import {XSelection} from './selection';
 
 @customElement('lit-selector')
