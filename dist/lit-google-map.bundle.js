@@ -2872,7 +2872,7 @@
         observeMarkers() {
             if (this.marketObserverSet)
                 return;
-            this.addEventListener("items-changed", event => { this.updateMarkers(); });
+            this.addEventListener("selector-items-changed", event => { this.updateMarkers(); });
             this.marketObserverSet = true;
         }
         updateMarkers() {
