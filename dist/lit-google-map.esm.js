@@ -319,7 +319,7 @@ let LitGoogleMap = class LitGoogleMap extends LitElement {
     constructor() {
         super(...arguments);
         this.apiKey = '';
-        this.version = '3.39';
+        this.version = '3.48';
         this.styles = {};
         this.zoom = 8;
         this.fitToMarkers = false;
