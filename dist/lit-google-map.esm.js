@@ -356,7 +356,7 @@ let LitGoogleMap = class LitGoogleMap extends LitElement {
     }
     attachChildrenToMap(children) {
         if (this.map) {
-            for (var i = 0, child; child = children[i]; ++i) {
+            for (let child of children) {
                 child.changeMap(this.map);
             }
         }
@@ -389,8 +389,8 @@ let LitGoogleMap = class LitGoogleMap extends LitElement {
     fitToMarkersChanged() {
         if (this.map && this.fitToMarkers && this.markers.length > 0) {
             var latLngBounds = new google.maps.LatLngBounds();
-            for (var i = 0, m; m = this.markers[i]; ++i) {
-                latLngBounds.extend(new google.maps.LatLng(m.latitude, m.longitude));
+            for (var marker of this.markers) {
+                latLngBounds.extend(new google.maps.LatLng(marker.latitude, marker.longitude));
             }
             if (this.markers.length > 1) {
                 this.map.fitBounds(latLngBounds);

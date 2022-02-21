@@ -94,7 +94,7 @@ export class LitGoogleMap extends LitElement {
 
     attachChildrenToMap(children : Array<Node>) {
         if (this.map) {
-          for (var i = 0, child; child = children[i]; ++i) {
+          for (let child of children) {
             (child as LitGoogleMapMarker).changeMap(this.map);
           }
         }
@@ -139,8 +139,8 @@ export class LitGoogleMap extends LitElement {
     fitToMarkersChanged() {
         if (this.map && this.fitToMarkers && this.markers.length > 0) {
             var latLngBounds = new google.maps.LatLngBounds();
-            for (var i = 0, m; m = this.markers[i]; ++i) {
-                latLngBounds.extend(new google.maps.LatLng(m.latitude, m.longitude));
+            for (var marker of this.markers) {
+                latLngBounds.extend(new google.maps.LatLng((marker as LitGoogleMapMarker).latitude, (marker as LitGoogleMapMarker).longitude));
             }
 
             // For one marker, don't alter zoom, just center it.
