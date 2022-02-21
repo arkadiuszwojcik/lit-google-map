@@ -69,8 +69,10 @@ npm run bundle
 ## Map element attributes
 
 * '*api-key*' - Google map API key
+* '*language*' - Google map language (optional)
+* '*map-id*' - Google map mapId (optional)
 * '*version*' - Google map js script version to load (default: '3.48')
-* '*styles*' - Map styles in json format
+* '*styles*' - Map styles in json format (optional)
 * '*zoom*' - Zoom level (default: '8')
 * '*fit-to-markers*' - Fit map area to display all markers
 * '*map-type*' - Map type to display: 'roadmap', 'satellite', 'hybrid', 'terrain'

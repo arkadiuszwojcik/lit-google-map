@@ -72,15 +72,18 @@ export class LitGoogleMapsApi extends JsonpLibraryElement {
     @property({type : String})
     language = '';
 
+    @property({type : String, attribute: 'map-id'})
+    mapId = '';
+
     get libraryUrl() : string {
-        return this.computeUrl(this.mapsUrl, this.version, this.apiKey, this.clientId, this.language);
+        return this.computeUrl(this.mapsUrl, this.version, this.apiKey, this.clientId, this.language, this.mapId);
     }
 
     get notifyEvent() : string {
         return 'api-load';
     }
 
-    computeUrl(mapsUrl : string, version : string, apiKey : string, clientId : string, language : string) : string {
+    computeUrl(mapsUrl : string, version : string, apiKey : string, clientId : string, language : string, mapId : string) : string {
         var url = mapsUrl + '&v=' + version;
 
         // Always load all Maps API libraries.
@@ -104,6 +107,10 @@ export class LitGoogleMapsApi extends JsonpLibraryElement {
 
         if (language) {
             url += '&language=' + language;
+        }
+
+        if (mapId) {
+            url += '&map_ids=' + mapId;
         }
 
         return url;

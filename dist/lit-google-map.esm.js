@@ -131,14 +131,15 @@ let LitGoogleMapsApi = class LitGoogleMapsApi extends JsonpLibraryElement {
         this.mapsUrl = 'https://maps.googleapis.com/maps/api/js?callback=%%callback%%';
         this.version = '3.39';
         this.language = '';
+        this.mapId = '';
     }
     get libraryUrl() {
-        return this.computeUrl(this.mapsUrl, this.version, this.apiKey, this.clientId, this.language);
+        return this.computeUrl(this.mapsUrl, this.version, this.apiKey, this.clientId, this.language, this.mapId);
     }
     get notifyEvent() {
         return 'api-load';
     }
-    computeUrl(mapsUrl, version, apiKey, clientId, language) {
+    computeUrl(mapsUrl, version, apiKey, clientId, language, mapId) {
         var url = mapsUrl + '&v=' + version;
         url += '&libraries=drawing,geometry,places,visualization';
         if (apiKey && !clientId) {
@@ -155,6 +156,9 @@ let LitGoogleMapsApi = class LitGoogleMapsApi extends JsonpLibraryElement {
         }
         if (language) {
             url += '&language=' + language;
+        }
+        if (mapId) {
+            url += '&map_ids=' + mapId;
         }
         return url;
     }
@@ -179,6 +183,10 @@ __decorate([
     property({ type: String }),
     __metadata("design:type", Object)
 ], LitGoogleMapsApi.prototype, "language", void 0);
+__decorate([
+    property({ type: String, attribute: 'map-id' }),
+    __metadata("design:type", Object)
+], LitGoogleMapsApi.prototype, "mapId", void 0);
 LitGoogleMapsApi = __decorate([
     customElement('lit-google-maps-api')
 ], LitGoogleMapsApi);
@@ -326,6 +334,8 @@ let LitGoogleMap = class LitGoogleMap extends LitElement {
         this.mapType = 'roadmap';
         this.centerLatitude = -34.397;
         this.centerLongitude = 150.644;
+        this.language = '';
+        this.mapId = '';
         this.map = null;
     }
     initGMap() {
@@ -344,7 +354,8 @@ let LitGoogleMap = class LitGoogleMap extends LitElement {
             zoom: this.zoom,
             center: { lat: this.centerLatitude, lng: this.centerLongitude },
             mapTypeId: this.mapType,
-            styles: this.styles
+            styles: this.styles,
+            mapId: this.mapId
         };
     }
     mapApiLoaded() {
@@ -402,7 +413,14 @@ let LitGoogleMap = class LitGoogleMap extends LitElement {
     }
     render() {
         return html `
-            <lit-google-maps-api id="api" api-key="${this.apiKey}" version="${this.version}" @api-load=${() => this.mapApiLoaded()}></lit-google-maps-api>
+            <lit-google-maps-api 
+                id="api" 
+                api-key="${this.apiKey}" 
+                version="${this.version}"
+                language="${this.language}"
+                map-id="${this.mapId}"
+                @api-load=${() => this.mapApiLoaded()}>
+            </lit-google-maps-api>
             <lit-selector 
                 id="markers-selector"
                 selected-attribute="open"
@@ -453,6 +471,14 @@ __decorate([
     property({ type: Number, attribute: 'center-longitude' }),
     __metadata("design:type", Number)
 ], LitGoogleMap.prototype, "centerLongitude", void 0);
+__decorate([
+    property({ type: String }),
+    __metadata("design:type", String)
+], LitGoogleMap.prototype, "language", void 0);
+__decorate([
+    property({ type: String, attribute: 'map-id' }),
+    __metadata("design:type", String)
+], LitGoogleMap.prototype, "mapId", void 0);
 LitGoogleMap = __decorate([
     customElement('lit-google-map')
 ], LitGoogleMap);

@@ -50,6 +50,12 @@ export class LitGoogleMap extends LitElement {
     @property({type : Number, attribute: 'center-longitude'})
     centerLongitude: number = 150.644;
 
+    @property({type : String})
+    language: string = '';
+
+    @property({type : String, attribute: 'map-id'})
+    mapId: string = '';
+
     map : google.maps.Map = null;
 
     markers : Array<Node>;
@@ -78,7 +84,8 @@ export class LitGoogleMap extends LitElement {
             center: {lat: this.centerLatitude, lng: this.centerLongitude},
             mapTypeId: this.mapType,
             // @ts-ignore
-            styles: this.styles
+            styles: this.styles,
+            mapId: this.mapId
         };
     }
 
@@ -164,7 +171,14 @@ export class LitGoogleMap extends LitElement {
 
     render() {
         return html`
-            <lit-google-maps-api id="api" api-key="${this.apiKey}" version="${this.version}" @api-load=${() => this.mapApiLoaded()}></lit-google-maps-api>
+            <lit-google-maps-api 
+                id="api" 
+                api-key="${this.apiKey}" 
+                version="${this.version}"
+                language="${this.language}"
+                map-id="${this.mapId}"
+                @api-load=${() => this.mapApiLoaded()}>
+            </lit-google-maps-api>
             <lit-selector 
                 id="markers-selector"
                 selected-attribute="open"
