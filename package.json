@@ -12,6 +12,14 @@
         "type": "git",
         "url": "git+https://github.com/arkadiuszwojcik/lit-google-map.git"
     },
+    "keywords": [
+        "map",
+        "maps",
+        "component",
+        "web component",
+        "lit",
+        "google"
+    ],
     "main": "dist/lit-google-map.bundle.min.js",
     "module": "dist/lit-google-map.esm.min.js",
     "typings": "*.d.ts",
