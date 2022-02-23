@@ -21,7 +21,7 @@
     </style>
   </head>
   <body>
-    <script src="../dist/lit-google-map.bundle.min.js"></script>
+    <script src="../dist/lit-google-map.bundle.js"></script>
 
     <div id="map-wrapper">
         <h3>Edit this html file and fill api-key map attribite for non developer mode map with all features</h3>
@@ -41,6 +41,15 @@
                 <p>Poznań</p>
                 <img src="poznan.jpg" alt="poznan">
               </lit-google-map-marker>
+              
+            <lit-google-map-circle slot="shapes" center-latitude="53.176389" center-longitude="22.073056" radius="50000" fill-color="#7FB3D5" fill-opacity="0.35" stroke-color="#2874A6" stroke-opacity="0.8" stroke-weight="5">
+            </lit-google-map-circle>
+            
+            <lit-google-map-circle slot="shapes" center-latitude="49.4404582" center-longitude="20.2700361">
+            </lit-google-map-circle>
+            
+            <lit-google-map-polygon slot="shapes" paths='[{"lat": 53.7332, "lng": 15.5180}, {"lat": 54.0444, "lng": 18.1379}, {"lat": 53.2028, "lng": 16.9292}, {"lat": 53.7332, "lng": 15.5180}]' fill-color="#7FB3D5" fill-opacity="0.35" stroke-color="#2874A6" stroke-opacity="0.8" stroke-weight="5">
+            </lit-google-map-polygon>     
     
         </lit-google-map>
     </div>
