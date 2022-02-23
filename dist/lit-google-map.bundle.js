@@ -400,6 +400,150 @@
         n$1('lit-google-map-marker')
     ], exports.LitGoogleMapMarker);
 
+    exports.LitGoogleMapCircle = class LitGoogleMapCircle extends s {
+        constructor() {
+            super(...arguments);
+            this.centerLatitude = -34.397;
+            this.centerLongitude = 150.644;
+            this.radius = 100000;
+            this.fillColor = '#FF0000';
+            this.fillOpacity = 0.35;
+            this.strokeColor = '#FF0000';
+            this.strokeOpacity = 0.8;
+            this.strokeWeight = 2;
+            this.map = null;
+            this.circle = null;
+        }
+        attachToMap(map) {
+            this.map = map;
+            this.mapChanged();
+        }
+        mapChanged() {
+            if (this.circle) {
+                this.circle.setMap(null);
+                google.maps.event.clearInstanceListeners(this.circle);
+            }
+            if (this.map && this.map instanceof google.maps.Map) {
+                this.mapReady();
+            }
+        }
+        mapReady() {
+            this.circle = new google.maps.Circle({
+                map: this.map,
+                strokeColor: this.strokeColor,
+                strokeOpacity: this.strokeOpacity,
+                strokeWeight: this.strokeWeight,
+                fillColor: this.fillColor,
+                fillOpacity: this.fillOpacity,
+                center: {
+                    lat: this.centerLatitude,
+                    lng: this.centerLongitude
+                },
+                radius: this.radius
+            });
+        }
+    };
+    __decorate([
+        e({ type: Number, attribute: 'center-latitude' }),
+        __metadata("design:type", Number)
+    ], exports.LitGoogleMapCircle.prototype, "centerLatitude", void 0);
+    __decorate([
+        e({ type: Number, attribute: 'center-longitude' }),
+        __metadata("design:type", Number)
+    ], exports.LitGoogleMapCircle.prototype, "centerLongitude", void 0);
+    __decorate([
+        e({ type: Number }),
+        __metadata("design:type", Number)
+    ], exports.LitGoogleMapCircle.prototype, "radius", void 0);
+    __decorate([
+        e({ type: String, attribute: 'fill-color' }),
+        __metadata("design:type", String)
+    ], exports.LitGoogleMapCircle.prototype, "fillColor", void 0);
+    __decorate([
+        e({ type: Number, attribute: 'fill-opacity' }),
+        __metadata("design:type", Number)
+    ], exports.LitGoogleMapCircle.prototype, "fillOpacity", void 0);
+    __decorate([
+        e({ type: String, attribute: 'stroke-color' }),
+        __metadata("design:type", String)
+    ], exports.LitGoogleMapCircle.prototype, "strokeColor", void 0);
+    __decorate([
+        e({ type: Number, attribute: 'stroke-opacity' }),
+        __metadata("design:type", Number)
+    ], exports.LitGoogleMapCircle.prototype, "strokeOpacity", void 0);
+    __decorate([
+        e({ type: Number, attribute: 'stroke-weight' }),
+        __metadata("design:type", Number)
+    ], exports.LitGoogleMapCircle.prototype, "strokeWeight", void 0);
+    exports.LitGoogleMapCircle = __decorate([
+        n$1('lit-google-map-circle')
+    ], exports.LitGoogleMapCircle);
+
+    exports.LitGoogleMapPolygon = class LitGoogleMapPolygon extends s {
+        constructor() {
+            super(...arguments);
+            this.paths = [];
+            this.fillColor = '#FF0000';
+            this.fillOpacity = 0.35;
+            this.strokeColor = '#FF0000';
+            this.strokeOpacity = 0.8;
+            this.strokeWeight = 2;
+            this.map = null;
+            this.polygon = null;
+        }
+        attachToMap(map) {
+            this.map = map;
+            this.mapChanged();
+        }
+        mapChanged() {
+            if (this.polygon) {
+                this.polygon.setMap(null);
+                google.maps.event.clearInstanceListeners(this.polygon);
+            }
+            if (this.map && this.map instanceof google.maps.Map) {
+                this.mapReady();
+            }
+        }
+        mapReady() {
+            this.polygon = new google.maps.Polygon({
+                map: this.map,
+                strokeColor: this.strokeColor,
+                strokeOpacity: this.strokeOpacity,
+                strokeWeight: this.strokeWeight,
+                fillColor: this.fillColor,
+                fillOpacity: this.fillOpacity,
+                paths: this.paths
+            });
+        }
+    };
+    __decorate([
+        e({ type: Array }),
+        __metadata("design:type", Array)
+    ], exports.LitGoogleMapPolygon.prototype, "paths", void 0);
+    __decorate([
+        e({ type: String, attribute: 'fill-color' }),
+        __metadata("design:type", String)
+    ], exports.LitGoogleMapPolygon.prototype, "fillColor", void 0);
+    __decorate([
+        e({ type: Number, attribute: 'fill-opacity' }),
+        __metadata("design:type", Number)
+    ], exports.LitGoogleMapPolygon.prototype, "fillOpacity", void 0);
+    __decorate([
+        e({ type: String, attribute: 'stroke-color' }),
+        __metadata("design:type", String)
+    ], exports.LitGoogleMapPolygon.prototype, "strokeColor", void 0);
+    __decorate([
+        e({ type: Number, attribute: 'stroke-opacity' }),
+        __metadata("design:type", Number)
+    ], exports.LitGoogleMapPolygon.prototype, "strokeOpacity", void 0);
+    __decorate([
+        e({ type: Number, attribute: 'stroke-weight' }),
+        __metadata("design:type", Number)
+    ], exports.LitGoogleMapPolygon.prototype, "strokeWeight", void 0);
+    exports.LitGoogleMapPolygon = __decorate([
+        n$1('lit-google-map-polygon')
+    ], exports.LitGoogleMapPolygon);
+
     exports.LitGoogleMap = class LitGoogleMap extends s {
         constructor() {
             super(...arguments);
@@ -425,6 +569,7 @@
             }
             this.map = new google.maps.Map(this.shadowRoot.getElementById('map'), this.getMapOptions());
             this.updateMarkers();
+            this.updateShapes();
         }
         getMapOptions() {
             return {
@@ -474,6 +619,15 @@
                 this.fitToMarkersChanged();
             }
         }
+        updateShapes() {
+            var shapesSelector = this.shadowRoot.getElementById("shapes-selector");
+            if (!shapesSelector)
+                return;
+            this.shapes = shapesSelector.items;
+            for (let s of this.shapes) {
+                s.attachToMap(this.map);
+            }
+        }
         fitToMarkersChanged() {
             if (this.map && this.fitToMarkers && this.markers.length > 0) {
                 var latLngBounds = new google.maps.LatLngBounds();
@@ -487,6 +641,8 @@
             }
         }
         deselectMarker(event) {
+        }
+        deselectShape(event) {
         }
         render() {
             return $ `
@@ -504,6 +660,13 @@
                 activate-event="google-map-marker-open"
                 @google-map-marker-close=${(e) => this.deselectMarker(e)}>
                     <slot id="markers" name="markers"></slot>
+            </lit-selector>
+            <lit-selector 
+                id="shapes-selector"
+                selected-attribute="open"
+                activate-event="google-map-shape-open"
+                @google-map-shape-close=${(e) => this.deselectShape(e)}>
+                    <slot id="shapes" name="shapes"></slot>
             </lit-selector>
             <div id="map">
             </div>

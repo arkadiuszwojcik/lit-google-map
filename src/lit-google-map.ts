@@ -3,6 +3,7 @@ import {customElement, property} from 'lit/decorators.js';
 import {LitGoogleMapsApi} from './lit-google-maps-api';
 import {LitGoogleMapMarker} from './lit-google-map-marker';
 import {LitSelector} from './lit-selector';
+import {Shape} from './shape';
 
 @customElement('lit-google-map')
 export class LitGoogleMap extends LitElement {
@@ -59,6 +60,7 @@ export class LitGoogleMap extends LitElement {
     map : google.maps.Map = null;
 
     markers : Array<Node>;
+    shapes : Array<Node>;
 
     marketObserverSet : boolean;
 
@@ -76,6 +78,7 @@ export class LitGoogleMap extends LitElement {
         this.map = new google.maps.Map(this.shadowRoot.getElementById('map'), this.getMapOptions());
 
         this.updateMarkers();
+        this.updateShapes();
     }
 
     getMapOptions() : google.maps.MapOptions {
@@ -143,6 +146,18 @@ export class LitGoogleMap extends LitElement {
         }
     }
 
+    updateShapes() {
+        var shapesSelector = this.shadowRoot.getElementById("shapes-selector") as LitSelector;
+        if (!shapesSelector)
+            return;
+
+        this.shapes = shapesSelector.items;
+
+        for (let s of this.shapes) {
+            (s as unknown as Shape).attachToMap(this.map);
+        }
+    }
+
     fitToMarkersChanged() {
         if (this.map && this.fitToMarkers && this.markers.length > 0) {
             var latLngBounds = new google.maps.LatLngBounds();
@@ -160,6 +175,9 @@ export class LitGoogleMap extends LitElement {
     }
 
     deselectMarker(event : Event) {
+    }
+    
+    deselectShape(event : Event) {
     }
 
     static styles = css`
@@ -185,6 +203,13 @@ export class LitGoogleMap extends LitElement {
                 activate-event="google-map-marker-open"
                 @google-map-marker-close=${(e) => this.deselectMarker(e)}>
                     <slot id="markers" name="markers"></slot>
+            </lit-selector>
+            <lit-selector 
+                id="shapes-selector"
+                selected-attribute="open"
+                activate-event="google-map-shape-open"
+                @google-map-shape-close=${(e) => this.deselectShape(e)}>
+                    <slot id="shapes" name="shapes"></slot>
             </lit-selector>
             <div id="map">
             </div>
