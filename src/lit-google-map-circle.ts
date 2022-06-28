@@ -31,6 +31,28 @@ export class LitGoogleMapCircle extends LitElement implements Shape {
     map : google.maps.Map = null;
     circle : google.maps.Circle = null;
 
+    attributeChangedCallback(name : string, oldval : string, newval : string) {
+        super.attributeChangedCallback(name, oldval, newval);
+        switch (name) {
+            case 'center-latitude': {
+                this.updateCenter();
+                break;
+            }
+            case 'center-longitude': {
+                this.updateCenter();
+                break;
+            }
+            case 'radius': {
+                this.circle?.setRadius(this.radius);
+                break;
+            }
+        }
+    }
+
+    updateCenter() {
+        this.circle?.setCenter(new google.maps.LatLng(this.centerLatitude, this.centerLongitude));
+    }
+
     attachToMap(map: google.maps.Map): void {
         this.map = map;
         this.mapChanged();
