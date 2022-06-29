@@ -1,6 +1,6 @@
 {
     "name": "lit-google-map",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Google Maps web components based on Lit v2",
     "private": false,
     "license": "MIT",
