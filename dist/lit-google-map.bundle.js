@@ -291,11 +291,11 @@
                     break;
                 }
                 case 'label': {
-                    (_a = this.marker) === null || _a === void 0 ? void 0 : _a.setLabel(newval);
+                    (_a = this.marker) === null || _a === void 0 ? void 0 : _a.setLabel(this.label);
                     break;
                 }
                 case 'z-index': {
-                    (_b = this.marker) === null || _b === void 0 ? void 0 : _b.setZIndex(newval);
+                    (_b = this.marker) === null || _b === void 0 ? void 0 : _b.setZIndex(this.zIndex);
                     break;
                 }
             }
@@ -413,6 +413,28 @@
             this.strokeWeight = 2;
             this.map = null;
             this.circle = null;
+        }
+        attributeChangedCallback(name, oldval, newval) {
+            var _a;
+            super.attributeChangedCallback(name, oldval, newval);
+            switch (name) {
+                case 'center-latitude': {
+                    this.updateCenter();
+                    break;
+                }
+                case 'center-longitude': {
+                    this.updateCenter();
+                    break;
+                }
+                case 'radius': {
+                    (_a = this.circle) === null || _a === void 0 ? void 0 : _a.setRadius(this.radius);
+                    break;
+                }
+            }
+        }
+        updateCenter() {
+            var _a;
+            (_a = this.circle) === null || _a === void 0 ? void 0 : _a.setCenter(new google.maps.LatLng(this.centerLatitude, this.centerLongitude));
         }
         attachToMap(map) {
             this.map = map;
@@ -595,10 +617,10 @@
             }
         }
         observeMarkers() {
-            if (this.marketObserverSet)
+            if (this.markerObserverSet)
                 return;
             this.addEventListener("selector-items-changed", event => { this.updateMarkers(); });
-            this.marketObserverSet = true;
+            this.markerObserverSet = true;
         }
         updateMarkers() {
             this.observeMarkers();

@@ -62,7 +62,7 @@ export class LitGoogleMap extends LitElement {
     markers : Array<Node>;
     shapes : Array<Node>;
 
-    marketObserverSet : boolean;
+    markerObserverSet : boolean;
 
     initGMap() {
         if (this.map != null) {
@@ -111,11 +111,11 @@ export class LitGoogleMap extends LitElement {
     }
 
     observeMarkers() {
-        if (this.marketObserverSet)
+        if (this.markerObserverSet)
             return;
 
         this.addEventListener("selector-items-changed", event => { this.updateMarkers() });
-        this.marketObserverSet = true;
+        this.markerObserverSet = true;
     }
 
     updateMarkers() {

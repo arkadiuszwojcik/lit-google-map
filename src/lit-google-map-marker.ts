@@ -28,7 +28,7 @@ export class LitGoogleMapMarker extends LitElement {
     openInfoHandler : google.maps.MapsEventListener;
     closeInfoHandler : google.maps.MapsEventListener;
 
-    attributeChangedCallback(name : string, oldval : any, newval : any) {
+    attributeChangedCallback(name : string, oldval : string, newval : string) {
         super.attributeChangedCallback(name, oldval, newval);
         switch (name) {
             case 'open': {
@@ -44,11 +44,11 @@ export class LitGoogleMapMarker extends LitElement {
                 break;
             }
             case 'label': {
-                this.marker?.setLabel(newval);
+                this.marker?.setLabel(this.label);
                 break;
             }
             case 'z-index': {
-                this.marker?.setZIndex(newval);
+                this.marker?.setZIndex(this.zIndex);
                 break;
             }
         }
